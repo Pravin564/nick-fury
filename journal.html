@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+	<head>
+        <title>Create Journal</title>
+        <link rel="stylesheet" type= "text/css" href="../css/journal.css">
+        <link href="https://fonts.googleapis.com/css?family=Cambo&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<link rel="shortcut icon" type="image/ico" href="../images/favicon.ico"/>
+    </head>
+
+    <body onload= "newEntry()">
+        <div class="navBar">
+            <img src="../images/jot-logo.png" class="logo">
+            <div class="navButtons">
+                <a href="about-us.html" id="about-us">About Us</a>
+                <a href= "dashboard.html" id="dashboard">Dashboard</a>
+                <a href="faqs.html" id="faq">FAQs</a>
+            </div>
+            <div class="welcome">
+                <a>Welcome, John</a>
+                <div class="welcome-dash">
+                    <a href="login.html" id="logout">Logout</a>
+                    <a href="https://suicidepreventionlifeline.org/" target="_blank" id="emergency">Emergency</a>
+                </div>
+            </div>
+
+        </div>
+       <div class="main">
+            <div class= "header-container">
+                <div class="prompt-container">
+                    <h1> Today's Prompt: </h1>
+                    <h3 id="prompt"> What did you learn in therapy today? </h3>
+                </div>
+                <div class= "mood-container">
+                    <h2>How do you feel?</h2>
+                    <div class="rate-mood">
+                        <div class="slide-container">
+                            <i class="fas fa-sad-tear"></i>
+                            <input type="range" min="1" max="10" steps="1" value="1" class="slider">
+                            <i class="fas fa-laugh-beam"></i>
+                        </div>
+                        <div class="mood-button-container">
+                            <button class="add-mood" onclick="saveMood(); popupMoodShow();">Add Mood</button>
+                        </div>
+                        <div class="mood-popup-container">
+                            <span class="mood-popuptext" id="moodPopup">Your Mood Was Added To The Chart!</span>
+                        </div>
+                    </div>
+                    <ul class="range-labels">
+                        <li class="ratings">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                      </ul>
+                </div>
+            </div>
+            <section class= "journal-entry">
+                <div class= "title-container">
+                    <input id="title-input" type="text" placeholder="Enter Optional Title Here" name="title">
+                    <div class="button-container">
+                        <div class="save-container">
+                            <button id="save" onclick="saveEntry(); popupSaveShow();"><i class="far fa-save fa-lg"></i></button>
+                            <span class="tooltip">Save entry.</span>
+                            <div class="save-popup-container">
+                                <span class="save-popuptext" id="savePopup">Your Entry Was Added To The Dashboard!</span>
+                            </div>
+                        </div>
+                        <div class="done-container">
+                            <button id="done" onclick="window.location.href = 'dashboard.html';"><i class="fas fa-times-circle fa-lg"></i></button>
+                            <span class="tooltip">Back to dashboard.</span>
+                        </div>
+                        <div class="pin-container">
+                            <button id="pin" onclick="pinEntry()"><i class="fas fa-user-shield fa-lg"></i></button>
+                            <span class="tooltip">Share entry with therapist.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="entry-container">
+                    <textarea id="entry" type="text" placeholder="Let the ideas flow... " cols="1" rows="10"></textarea>
+                </div>
+            </section>
+       </div>
+        <script type="text/javascript" src="journal.js"></script>
+        <script src="https://kit.fontawesome.com/62a7c74d0d.js" crossorigin="anonymous"></script>
+    </body>
+
+
+</html>

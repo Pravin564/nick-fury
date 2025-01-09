@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <link rel="stylesheet" type= "text/css" href="../css/dashboard.css">
+        <link href="https://fonts.googleapis.com/css?family=Cambo&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/ico" href="../images/favicon.ico"/>
+    </head>
+    <body onload ="loadEntries()">
+        <div class="navBar">
+            <img src="../images/jot-logo.png" class="logo">
+            <div class="navButtons">
+                <a href="about-us.html" id="about-us">About Us</a>
+                <a onclick="returnBack()" id="dashboard">Dashboard</a>
+                <a href="faqs.html" id="faq">FAQs</a>
+            </div>
+            <div class="welcome">
+                <a>Welcome, John</a>
+                <div class="welcome-dash">
+                    <a href="login.html" id="logout">Logout</a>
+                    <a href="https://suicidepreventionlifeline.org/" target="_blank" id="emergency">Emergency</a>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="progress-chatroom">
+                <div class="progress-graph">
+                    <h2 id="progress-title">Mood Progress</h2>
+                    <div class="graph-container">
+                        <canvas id="moodChart" responsive="false"></canvas>
+                    </div>
+                </div>
+                <div class="chatroom">
+                    <div class="chat-header">
+                        <h2 class="chat-title">Chat with John</h2>
+                        <div class="is-online">
+                            <img src="../images/offline.png"></img>
+                            <span class="chat-status">Offline</span>
+                        </div>
+                    </div>
+                    <p class="chat-display">Messages with John will appear here.</p>
+                    <input class="chat-entry" type="text" placeholder="Type a message..."> </input>
+                </div>
+            </div>
+            <div class="journal-hub">
+                <div class="journal-hub-header">
+                    <h2 id="hub-title">Journal Hub</h2>
+                </div>
+                <input class="search-bar" type="text-area" placeholder="Search for entry..."> </input>
+                <div class="entries">
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="therapist-dashboard.js"></script>
+    </body>
+    <script>
+    var ctx = document.getElementById("moodChart").getContext('2d');
+
+    var moods = [2, 5, 3];
+    var dates = ["2/8/2020", "3/1/2020", "3/3/2020"];
+
+    var moodArr = JSON.parse(window.localStorage.getItem("moodArray"));
+    var datesArr = JSON.parse(window.localStorage.getItem("dates"));
+
+    if (moodArr != null)
+        moods = moods.concat(moodArr);
+
+    if (datesArr != null)
+        dates = dates.concat(datesArr);
+
+    var moodChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{ // Name the series
+                label: "Mood",
+                data: moods, // Specify the data values array
+                fill: false,
+                borderColor: '#54ab6b', // Add custom color border (Line)
+                backgroundColor: '#FFD700', // Add custom color background (Points and Fill)
+                borderWidth: 2,// Specify bar border width
+                pointRadius: 6,
+                pointHoverRadius: 6
+            }]},
+        options: {
+         legend: {
+            display: false
+         },
+          responsive: true, // Instruct chart js to respond nicely.
+          maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+          scales: {
+                xAxes: [{
+                    gridLines: {
+                        display:true
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display:false
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+</html>
